@@ -1,20 +1,21 @@
 #include <fstream>
-#include <algorithm>
-#include <sstream>
+#include <iostream>
+#include <cstring>
 using namespace std;
 
-bool isSame(const string& s)
-{
-    return count(s.begin(), s.end(), '(') == count(s.begin(), s.end(), ')');
-}
 
-string readFile(const string& fileName) {
-    ifstream f(fileName);
-    stringstream  ss;
-    ss << f.rdbuf();
-    return ss.str();
-}
+int main() {
 
-int main () {
-    return isSame(readFile("file.txt")) ? true : false;
+    ifstream fin("file.txt");
+    int MAX_LENGTH = 100;
+    char line[MAX_LENGTH];
+    int count = 0;
+    while( fin.getline(line, MAX_LENGTH)){
+        if(isdigit(line[0]) &&  isdigit(line[strlen(line)-1]))
+            count++;
+    }
+
+    fin.close();
+    cout << count;
+    return 0;
 }
